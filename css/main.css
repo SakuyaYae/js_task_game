@@ -7,6 +7,7 @@ body {
 header {
   width: 100%;
   display: flex;
+  border-bottom: 0.5vh solid antiquewhite;
 }
 
 header>nav {
@@ -14,10 +15,16 @@ header>nav {
   display: flex;
   justify-self: flex-start;
   justify-content: space-around;
+  padding: 1%;
 }
 
 nav>a {
   color: antiquewhite;
   text-decoration: none;
   font-size: xx-large;
+}
+
+#game>tr>td {
+  min-width: 5vw;
+  background-color: black;
 }
