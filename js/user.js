@@ -2,19 +2,23 @@ class User {
   #userList = [
     {
       userName: "Sakuya",
-      score: "0"
+      score: "0",
+      matchHistory: []
     },
     {
       userName: "Sakura",
-      score: "0"
+      score: "0",
+      matchHistory: []
     },
     {
       userName: "Yui",
-      score: "0"
+      score: "0",
+      matchHistory: []
     },
     {
       userName: "Vayle",
-      score: "0"
+      score: "0",
+      matchHistory: []
     }
   ];
   constructor() { }
