@@ -1,4 +1,6 @@
 class GameBoardGeneration {
+  static #idIndex = 0;
+
   static generateGameBoard() {
     const tbody = document.querySelector("tbody");
     for (var i = 0; i < 3; i++) {
@@ -21,7 +23,9 @@ class GameBoardGeneration {
 
   static #createNewTd() {
     const newTd = document.createElement("td");
-    newTd.innerText = "===="
+    newTd.innerText = "====";
+    newTd.id = this.#idIndex;
+    this.#idIndex++;
     return newTd;
   }
 }
