@@ -1,0 +1,23 @@
+body {
+  background-color: crimson;
+  color: antiquewhite;
+  font-family: Verdana;
+}
+
+header {
+  width: 100%;
+  display: flex;
+}
+
+header>nav {
+  width: 50%;
+  display: flex;
+  justify-self: flex-start;
+  justify-content: space-around;
+}
+
+nav>a {
+  color: antiquewhite;
+  text-decoration: none;
+  font-size: xx-large;
+}
