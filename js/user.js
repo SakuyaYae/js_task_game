@@ -1,26 +1,52 @@
-function createUser() {
-  const user = getUser();
-  const newUserRow = document.createElement("tr");
-  const newTdName = document.createElement("td");
-  const newTdScore = document.createElement("td");
+class User {
+  #userList = [
+    {
+      userName: "Sakuya",
+      score: "0"
+    },
+    {
+      userName: "Sakura",
+      score: "0"
+    },
+    {
+      userName: "Yui",
+      score: "0"
+    },
+    {
+      userName: "Vayle",
+      score: "0"
+    }
+  ];
+  constructor() { }
 
-  newTdName.innerText = user.userName;
-  newTdScore.innerText = user.score;
-  newUserRow.appendChild(newTdName);
-  newUserRow.appendChild(newTdScore);
+  createUser(userIndex) {
+    const user = this.#getUser(userIndex);
+    const newUserRow = document.createElement("tr");
+    const newTdName = document.createElement("td");
+    const newTdScore = document.createElement("td");
 
-  const tBody = document.querySelector("tbody");
-  tBody[0].appendChild(newUserRow);
-}
+    newTdName.innerText = user.userName;
+    newTdScore.innerText = user.score;
+    newUserRow.appendChild(newTdName);
+    newUserRow.appendChild(newTdScore);
 
-function getUser() {
-  const user = {
-    userName: Sakuya,
-    score: "0"
+    const tBody = document.querySelector("tbody");
+    tBody.appendChild(newUserRow);
   }
-  return user;
+
+  getUserListLength() {
+    return this.#userList.length;
+  }
+
+  #getUser(userIndex) {
+    return this.#userList[userIndex];;
+  }
 }
 
 function main() {
-
+  const user = new User();
+  for (var i = 0; i < user.getUserListLength(); i++) {
+    user.createUser(i);
+  }
 }
+main()
