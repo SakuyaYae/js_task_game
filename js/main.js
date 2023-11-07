@@ -30,7 +30,36 @@ class GameBoardGeneration {
   }
 }
 
+class GameLogic {
+  static #playerTurnKeeper = 1;
+  static gameStart() {
+    this.#playerTurn();
+  }
+  static playerMove(input) {
+    this.#playerTurnUpdate();
+    this.#playerTurn();
+  }
+
+  static #playerTurnUpdate() {
+    if (this.#playerTurnKeeper === 1) {
+      this.#playerTurnKeeper++;
+    }
+    else if (this.#playerTurnKeeper === 2) {
+      this.#playerTurnKeeper--;
+    }
+    else {
+      this.#playerTurnKeeper = 1;
+    }
+  }
+
+  static #playerTurn() {
+    const playerTurnElem = document.getElementById("playerTurnDisplay");
+    playerTurnElem.innerText = "Player " + this.#playerTurnKeeper;
+  }
+}
+
 function main() {
   GameBoardGeneration.generateGameBoard();
+  GameLogic.gameStart();
 }
 main();
