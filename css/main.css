@@ -10,6 +10,18 @@ header {
   border-bottom: 0.5vh solid antiquewhite;
 }
 
+main {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+form {
+  justify-self: center;
+}
+
 header>nav {
   width: 50%;
   display: flex;
