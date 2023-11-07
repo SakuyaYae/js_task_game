@@ -28,11 +28,14 @@ class User {
     const newUserRow = document.createElement("tr");
     const newTdName = document.createElement("td");
     const newTdScore = document.createElement("td");
+    const newTdMatch = document.createElement("td");
 
     newTdName.innerText = user.userName;
     newTdScore.innerText = user.score;
+    newTdMatch.innerText = user.matchHistory + "==";
     newUserRow.appendChild(newTdName);
     newUserRow.appendChild(newTdScore);
+    newUserRow.appendChild(newTdMatch);
 
     const tBody = document.querySelector("tbody");
     tBody.appendChild(newUserRow);
