@@ -34,6 +34,7 @@ class GameLogic {
   static #playerTurnKeeper = 1;
   static #player1UnitCount = 0;
   static #player2UnitCount = 0;
+  static #GameRoundCount = 0;
 
   static gameStart() {
     this.#playerTurnDisplay();
@@ -61,11 +62,13 @@ class GameLogic {
     else {
       this.#playerTurnKeeper = 1;
     }
+    this.#GameRoundCount++;
   }
   static #moveValidation(input) {
     var valid = true;
     return valid;
   }
+
   static #playerTurnDisplay() {
     const playerTurnElem = document.getElementById("playerTurnDisplay");
     playerTurnElem.innerText = "Player " + this.#playerTurnKeeper;
