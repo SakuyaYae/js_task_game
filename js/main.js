@@ -57,10 +57,12 @@ class GameLogic {
       matchHistory: []
     }
   ]
+  static gameLoad() {
+    this.#getPlayerData();
+  }
 
   static gameStart() {
     this.#playerTurnDisplay();
-    this.#getPlayerData();
   }
 
   static playerMove(input) {
@@ -189,8 +191,25 @@ function resetGameBoard() {
   GameBoardGeneration.generateGameBoard();
 }
 
+function createPlayerOptions() {
+  const player1Select = document.getElementById("player1");
+  const player2Select = document.getElementById("player2");
+  for (var i = 0; i < GameLogic.playerList.length; i++) {
+    const newPlayer1 = document.createElement("option");
+    newPlayer1.innerText = GameLogic.playerList[i].userName;
+    player1Select.appendChild(newPlayer1);
+  }
+  for (var i = 0; i < GameLogic.playerList.length; i++) {
+    const newPlayer2 = document.createElement("option");
+    newPlayer2.innerText = GameLogic.playerList[i].userName;
+    player2Select.appendChild(newPlayer2);
+  }
+}
+
 function main() {
   GameBoardGeneration.generateGameBoard();
+  GameLogic.gameLoad();
+  createPlayerOptions()
 
   const startBtn = document.getElementById("startBtn");
   startBtn.addEventListener("click", function (event) {
