@@ -17,9 +17,13 @@ class regUser {
 function main() {
   const regUserFrom = document.getElementById("form");
   const userName = document.getElementById("userName");
+  const messageDisplay = document.createElement("p");
+  const main = document.querySelector("main");
+  main.appendChild(messageDisplay);
   regUserFrom.addEventListener("submit", function (event) {
     event.preventDefault();
     regUser.createUser(userName);
+    messageDisplay.innerText = "User Saved"
   })
 }
 main();
