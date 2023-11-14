@@ -45,6 +45,18 @@ class GameLogic {
     score: "0",
     matchHistory: []
   };
+  static playerList = [
+    {
+      userName: "Vayle",
+      score: "0",
+      matchHistory: []
+    },
+    {
+      userName: "Saya",
+      score: "0",
+      matchHistory: []
+    }
+  ]
 
   static gameStart() {
     this.#playerTurnDisplay();
@@ -172,9 +184,20 @@ async function getJsonData() {
   return userData;
 }
 
+function resetGameBoard() {
+  document.querySelector("tbody").innerHTML = "";
+  GameBoardGeneration.generateGameBoard();
+}
+
 function main() {
   GameBoardGeneration.generateGameBoard();
-  GameLogic.gameStart();
+
+  const startBtn = document.getElementById("startBtn");
+  startBtn.addEventListener("click", function (event) {
+    resetGameBoard()
+    GameLogic.gameStart();
+  })
+
   const gameBoard = document.getElementById("game");
   gameBoard.addEventListener("click", function (event) {
     GameLogic.playerMove(event.target);
