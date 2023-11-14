@@ -30,13 +30,29 @@ header>nav {
   padding: 1%;
 }
 
+button {
+  color: antiquewhite;
+  background-color: black;
+  font-size: x-large;
+}
+
+
 nav>a {
   color: antiquewhite;
   text-decoration: none;
   font-size: xx-large;
 }
 
+th {
+  font-size: xx-large;
+}
+
+td {
+  font-size: x-large;
+}
+
 #game>tr>td {
   min-width: 5vw;
+  font-size: xx-large;
   background-color: black;
 }
