@@ -2,23 +2,47 @@ class User {
   #userList = [
     {
       userName: "Sakuya",
-      score: "0",
-      matchHistory: []
+      score: "3",
+      matchHistory: [{
+        opponent: "Sakura",
+        result: "Win"
+      }]
     },
     {
       userName: "Sakura",
-      score: "0",
-      matchHistory: []
+      score: "1",
+      matchHistory: [{
+        opponent: "Sakuya",
+        result: "Loss"
+      }]
     },
     {
       userName: "Yui",
-      score: "0",
-      matchHistory: []
+      score: "2",
+      matchHistory: [
+        {
+          opponent: "Vayle",
+          result: "Loss"
+        },
+        {
+          opponent: "Vayle",
+          result: "Loss"
+        }
+      ]
     },
     {
       userName: "Vayle",
-      score: "0",
-      matchHistory: []
+      score: "6",
+      matchHistory: [
+        {
+          opponent: "Yui",
+          result: "Win"
+        },
+        {
+          opponent: "Yui",
+          result: "Win"
+        }
+      ]
     }
   ];
   constructor() { }
@@ -32,7 +56,11 @@ class User {
 
     newTdName.innerText = user.userName;
     newTdScore.innerText = user.score;
-    newTdMatch.innerText = user.matchHistory + "==";
+    for (var i = 0; i < user.matchHistory.length; i++) {
+      newTdMatch.innerText += user.matchHistory[i].opponent + " " + user.matchHistory[i].result + " \n";
+
+    }
+
     newUserRow.appendChild(newTdName);
     newUserRow.appendChild(newTdScore);
     newUserRow.appendChild(newTdMatch);
