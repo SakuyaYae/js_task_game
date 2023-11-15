@@ -20,6 +20,7 @@ function main() {
   const messageDisplay = document.createElement("p");
   const main = document.querySelector("main");
   main.appendChild(messageDisplay);
+
   regUserFrom.addEventListener("submit", function (event) {
     event.preventDefault();
     regUser.createUser(userName);
