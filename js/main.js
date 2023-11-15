@@ -1,7 +1,8 @@
 class GameBoardGeneration {
-  static #idIndex = 1;
+  static #idIndex;
 
   static generateGameBoard() {
+    this.#idIndex = 1;
     const tbody = document.querySelector("tbody");
     for (var i = 0; i < 3; i++) {
       tbody.appendChild(this.#createNewTR());
@@ -137,18 +138,82 @@ class GameLogic {
 
   static #winCheck() {
     var gameOver = false;
+    const gameBoardSpaces = ["Unused index0"];
+    var indexStr
+    for (var i = 1; i < 10; i++) {
+      indexStr = "#box" + i;
+      const gameBoardSpace = document.querySelector(indexStr)//document.getElementById(indexStr);
+      gameBoardSpaces.push(gameBoardSpace.innerHTML + "");
+    }
+    if (this.#playerTurnKeeper === 1) {
+      const O = "O";
+      if (gameBoardSpaces[1] === O && gameBoardSpaces[4] === O && gameBoardSpaces[7] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[2] === O && gameBoardSpaces[5] === O && gameBoardSpaces[8] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[3] === O && gameBoardSpaces[6] === O && gameBoardSpaces[9] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[1] === O && gameBoardSpaces[5] === O && gameBoardSpaces[9] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[3] === O && gameBoardSpaces[5] === O && gameBoardSpaces[7] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[1] === O && gameBoardSpaces[2] === O && gameBoardSpaces[3] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[4] === O && gameBoardSpaces[5] === O && gameBoardSpaces[6] === O) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[7] === O && gameBoardSpaces[8] === O && gameBoardSpaces[9] === O) {
+        gameOver = true
+      }
+    }
+    else {
+      const X = "X";
+      if (gameBoardSpaces[1] === X && gameBoardSpaces[4] === X && gameBoardSpaces[7] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[2] === X && gameBoardSpaces[5] === X && gameBoardSpaces[8] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[3] === X && gameBoardSpaces[6] === X && gameBoardSpaces[9] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[1] === X && gameBoardSpaces[5] === X && gameBoardSpaces[9] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[3] === X && gameBoardSpaces[5] === X && gameBoardSpaces[7] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[1] === X && gameBoardSpaces[2] === X && gameBoardSpaces[3] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[4] === X && gameBoardSpaces[5] === X && gameBoardSpaces[6] === X) {
+        gameOver = true
+      }
+      else if (gameBoardSpaces[7] === X && gameBoardSpaces[8] === X && gameBoardSpaces[9] === X) {
+        gameOver = true
+      }
+    }
     return gameOver;
   }
 
   static #createMatchHistory() {
+    console.log("Game Over")
     if (this.#GameRoundCount % 2 === 1) {
       const matchWonP1 = {
         opponent: this.#player2.userName,
-        result: "Win"
+        result: "Win",
+        turnCount: this.#GameRoundCount
       }
       const matchLostP2 = {
         opponent: this.#player1.userName,
-        result: "Lost"
+        result: "Lost",
+        turnCount: this.#GameRoundCount
       }
       this.#player1.matchHistory.push(matchWonP1);
       this.#player1.score += 3;
@@ -169,6 +234,12 @@ class GameLogic {
       this.#player2.matchHistory.push(matchLostP1);
       this.#player2.score += 3;
     }
+  }
+  static reset() {
+    this.#player1UnitCount = 0;
+    this.#player2UnitCount = 0;
+    this.#playerTurnKeeper = 1;
+
   }
   static #getPlayerData() {
     const userData = getJsonData();
@@ -215,7 +286,8 @@ function main() {
 
   const startBtn = document.getElementById("startBtn");
   startBtn.addEventListener("click", function (event) {
-    resetGameBoard()
+    resetGameBoard();
+    GameLogic.reset();
     GameLogic.gameStart();
   })
 
