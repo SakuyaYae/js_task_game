@@ -1,5 +1,5 @@
-class User {
-  #userList = [
+class UserDisplay {
+  static #userList = [
     {
       userName: "Sakuya",
       score: "3",
@@ -45,9 +45,8 @@ class User {
       ]
     }
   ];
-  constructor() { }
 
-  createUser(userIndex) {
+  static createUserDisplay(userIndex) {
     const user = this.#getUser(userIndex);
     const newUserRow = document.createElement("tr");
     const newTdName = document.createElement("td");
@@ -69,19 +68,18 @@ class User {
     tBody.appendChild(newUserRow);
   }
 
-  getUserListLength() {
+  static getUserListLength() {
     return this.#userList.length;
   }
 
-  #getUser(userIndex) {
+  static #getUser(userIndex) {
     return this.#userList[userIndex];;
   }
 }
 
 function main() {
-  const user = new User();
-  for (var i = 0; i < user.getUserListLength(); i++) {
-    user.createUser(i);
+  for (var i = 0; i < UserDisplay.getUserListLength(); i++) {
+    UserDisplay.createUserDisplay(i);
   }
 }
 main()
