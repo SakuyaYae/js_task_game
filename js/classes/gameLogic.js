@@ -1,8 +1,12 @@
+import getJsonData from "../function/getJsonData.js";
+
 export default class GameLogic {
+  static #gameActive = false;
   static #playerTurnKeeper = 1;
   static #player1UnitCount = 0;
   static #player2UnitCount = 0;
   static #GameRoundCount = 1;
+  static #winner = "";
   static #player1 = {
     userName: "Vayle",
     score: "0",
@@ -32,17 +36,28 @@ export default class GameLogic {
 
   static gameStart() {
     this.#playerTurnDisplay();
+    this.#gameActive = true;
   }
 
   static playerMove(input) {
     if (this.#moveValidation(input)) {
-      this.#playerUnitUpdate(input);
-      if (this.#winCheck()) {
-        this.#createMatchHistory();
+      if (this.#playerUnitCountCheck()) {
+        console.log("limit reatched");
+        this.#msgDisplay.innerText = "limit reatched";
       }
-      this.#playerTurnUpdate();
-      this.#playerTurnDisplay();
-      this.#msgDisplay.innerText = "";
+      else {
+        this.#playerUnitUpdate(input);
+        if (this.#winCheck()) {
+          this.#gameActive = false;
+          this.#createMatchHistory();
+          this.#msgDisplay.innerText = "GameOver";
+        }
+        else {
+          this.#playerTurnUpdate();
+          this.#playerTurnDisplay();
+          this.#msgDisplay.innerText = "";
+        }
+      }
     }
     else if (this.#playerUnitCountCheck()) {
       if (!this.#pickUpUnit(input)) {
@@ -50,7 +65,7 @@ export default class GameLogic {
         this.#msgDisplay.innerText = "Invalid move";
       }
       else {
-        console.log("Unit pickedup");
+        console.log("Unit picked up");
         this.#msgDisplay.innerText = "Unit pickedup";
       }
     }
@@ -82,11 +97,11 @@ export default class GameLogic {
     }
     else if (this.#playerTurnKeeper === 2) {
       this.#playerTurnKeeper--;
+      this.#GameRoundCount++;
     }
     else {
       this.#playerTurnKeeper = 1;
     }
-    this.#GameRoundCount++;
   }
   static #moveValidation(input) {
     var valid = true;
@@ -135,11 +150,11 @@ export default class GameLogic {
 
   static #winCheck() {
     var gameOver = false;
-    const gameBoardSpaces = ["Unused index0"];
-    var indexStr
+    const gameBoardSpaces = ["Unused index 0"];
+    var indexStr;
     for (var i = 1; i < 10; i++) {
       indexStr = "#box" + i;
-      const gameBoardSpace = document.querySelector(indexStr)//document.getElementById(indexStr);
+      const gameBoardSpace = document.querySelector(indexStr)
       gameBoardSpaces.push(gameBoardSpace.innerHTML + "");
     }
     if (this.#playerTurnKeeper === 1) {
@@ -200,9 +215,8 @@ export default class GameLogic {
   }
 
   static #createMatchHistory() {
-    this.#msgDisplay.innerText = "Game Over";
     console.log("gameOver");
-    if (this.#GameRoundCount % 2 === 1) {
+    if (this.#playerTurnKeeper === 1) {
       const matchWonP1 = {
         opponent: this.#player2.userName,
         result: "Win",
@@ -221,26 +235,36 @@ export default class GameLogic {
     else {
       const matchWonP2 = {
         opponent: this.#player1.userName,
-        result: "Win"
+        result: "Win",
+        turnCount: this.#GameRoundCount
       }
       const matchLostP1 = {
         opponent: this.#player2.userName,
-        result: "Lost"
+        result: "Lost",
+        turnCount: this.#GameRoundCount
       }
-      this.#player1.matchHistory.push(matchWonP2);
+      this.#player1.matchHistory.push(matchLostP1);
       this.#player1.score += 1;
-      this.#player2.matchHistory.push(matchLostP1);
+      this.#player2.matchHistory.push(matchWonP2);
       this.#player2.score += 3;
     }
+    console.log(this.#player1.userName)
+    console.log(this.#player1.matchHistory[0])
   }
+
+  static isRunning() {
+    return this.#gameActive;
+  }
+
   static reset() {
     this.#player1UnitCount = 0;
     this.#player2UnitCount = 0;
     this.#playerTurnKeeper = 1;
     this.#GameRoundCount = 1;
+    this.#winner = "";
   }
 
   static #getPlayerData() {
-    //const userData = getJsonData();
+    const userData = getJsonData();
   }
 }
