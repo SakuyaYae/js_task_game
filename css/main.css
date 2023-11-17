@@ -56,3 +56,30 @@ td {
   font-size: xx-large;
   background-color: black;
 }
+
+@media screen and (max-width: 1030px) {
+  nav>a {
+    color: antiquewhite;
+    text-decoration: none;
+    font-size: x-large;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  header>nav {
+    width: 50%;
+    display: flex;
+    justify-self: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 1%;
+  }
+
+  nav>a {
+    color: antiquewhite;
+    text-decoration: none;
+    width: 100%;
+    font-size: x-large;
+    padding: 2%;
+  }
+}
