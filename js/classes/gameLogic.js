@@ -160,55 +160,71 @@ export default class GameLogic {
     if (this.#playerTurnKeeper === 1) {
       const O = "O";
       if (gameBoardSpaces[1] === O && gameBoardSpaces[4] === O && gameBoardSpaces[7] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[2] === O && gameBoardSpaces[5] === O && gameBoardSpaces[8] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[3] === O && gameBoardSpaces[6] === O && gameBoardSpaces[9] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[1] === O && gameBoardSpaces[5] === O && gameBoardSpaces[9] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[3] === O && gameBoardSpaces[5] === O && gameBoardSpaces[7] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[1] === O && gameBoardSpaces[2] === O && gameBoardSpaces[3] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[4] === O && gameBoardSpaces[5] === O && gameBoardSpaces[6] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
       else if (gameBoardSpaces[7] === O && gameBoardSpaces[8] === O && gameBoardSpaces[9] === O) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P1";
       }
     }
     else {
       const X = "X";
       if (gameBoardSpaces[1] === X && gameBoardSpaces[4] === X && gameBoardSpaces[7] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[2] === X && gameBoardSpaces[5] === X && gameBoardSpaces[8] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[3] === X && gameBoardSpaces[6] === X && gameBoardSpaces[9] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[1] === X && gameBoardSpaces[5] === X && gameBoardSpaces[9] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[3] === X && gameBoardSpaces[5] === X && gameBoardSpaces[7] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[1] === X && gameBoardSpaces[2] === X && gameBoardSpaces[3] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[4] === X && gameBoardSpaces[5] === X && gameBoardSpaces[6] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
       else if (gameBoardSpaces[7] === X && gameBoardSpaces[8] === X && gameBoardSpaces[9] === X) {
-        gameOver = true
+        gameOver = true;
+        this.#winner = "P2";
       }
     }
     return gameOver;
@@ -216,7 +232,7 @@ export default class GameLogic {
 
   static #createMatchHistory() {
     console.log("gameOver");
-    if (this.#playerTurnKeeper === 1) {
+    if (this.#winner === "P1") {
       const matchWonP1 = {
         opponent: this.#player2.userName,
         result: "Win",
