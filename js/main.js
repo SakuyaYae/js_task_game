@@ -1,17 +1,6 @@
 import GameBoardGeneration from "./classes/gameBoard.js";
 import GameLogic from "./classes/gameLogic.js";
 
-async function getJsonData() {
-  const requestURL = "./json/users.json"
-  const request = new Request(requestURL, {
-    mode: "no-cors"
-  });
-  const response = await fetch(request);
-  const userData = response;
-  console.log(userData);
-  return userData;
-}
-
 function resetGameBoard() {
   document.querySelector("tbody").innerHTML = "";
   GameBoardGeneration.generateGameBoard();
@@ -37,18 +26,21 @@ function createPlayerOptions() {
 function main() {
   GameBoardGeneration.generateGameBoard();
   GameLogic.gameLoad();
-  createPlayerOptions()
+  createPlayerOptions();
 
   const startBtn = document.getElementById("startBtn");
   startBtn.addEventListener("click", function (event) {
     resetGameBoard();
     GameLogic.reset();
     GameLogic.gameStart();
-  })
+  });
 
   const gameBoard = document.getElementById("game");
   gameBoard.addEventListener("click", function (event) {
-    GameLogic.playerMove(event.target);
-  })
+    if (GameLogic.isRunning()) {
+      GameLogic.playerMove(event.target);
+    }
+  });
+
 }
 main();
