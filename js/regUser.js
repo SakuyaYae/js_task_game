@@ -1,3 +1,5 @@
+import GenerateUserId from "./classes/generateUserId.js";
+
 class regUser {
   static #saveUser(user) {
     console.log("user saved");
@@ -6,6 +8,7 @@ class regUser {
 
   static createUser(userName) {
     const user = {
+      UserId: GenerateUserId.getNewUserId(),
       userName: userName.value,
       score: "0",
       matchHistory: []
