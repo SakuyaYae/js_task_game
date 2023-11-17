@@ -280,6 +280,20 @@ export default class GameLogic {
     this.#winner = "";
   }
 
+  static setPlayers(setPlayer1, setPlayer2) {
+    for (var i = 0; i < this.playerList.length; i++) {
+      if (setPlayer1 === setPlayer2) {
+        continue;
+      }
+      if (setPlayer1 === this.playerList[i].userName) {
+        this.#player1 = this.playerList[i];
+      }
+      if (setPlayer2 === this.playerList[i].userName) {
+        this.#player2 = this.playerList[i];
+      }
+    }
+  }
+
   static #getPlayerData() {
     const userData = getJsonData();
   }
