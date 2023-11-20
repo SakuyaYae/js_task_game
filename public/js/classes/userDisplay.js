@@ -13,7 +13,7 @@ export default class UserDisplay {
     newTdName.innerText = user.userName;
     newTdScore.innerText = user.score;
     for (var i = 0; i < user.matchHistory.length; i++) {
-      newTdMatch.innerText += "Opponent: " + user.matchHistory[i].opponent + " |Result: " + user.matchHistory[i].result + " |Rounds played: " + user.matchHistory[i].turnCount + " \n";
+      newTdMatch.innerText += "|Opponent: " + user.matchHistory[i].opponent + " |Result: " + user.matchHistory[i].result + " |Rounds played: " + user.matchHistory[i].turnCount + "| \n";
 
     }
 
