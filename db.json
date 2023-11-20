@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "UserId": 1,
+      "userName": "Vayle",
+      "score": "0",
+      "matchHistory": [],
+      "id": 1
+    },
+    {
+      "UserId": 2,
+      "userName": "Sakuya",
+      "score": "0",
+      "matchHistory": [],
+      "id": 2
+    }
+  ]
+}
