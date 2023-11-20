@@ -1,29 +1,33 @@
 import GameBoardGeneration from "./classes/gameBoard.js";
-import GameLogic from "./classes/gameLogic.js";
+import gameLogic from "./classes/gameLogic.js";
 
+const GameLogic = new gameLogic();
 function resetGameBoard() {
   document.querySelector("tbody").innerHTML = "";
   GameBoardGeneration.generateGameBoard();
 }
 
-function createPlayerOptions() {
+async function createPlayerOptions() {
   const player1Select = document.getElementById("player1");
   const player2Select = document.getElementById("player2");
-  for (var i = 0; i < GameLogic.playerList.length; i++) {
+  const playerList = await GameLogic.getPlayerData();
+  for (var i = 0; i < playerList.length; i++) {
     const newPlayer1 = document.createElement("option");
     newPlayer1.setAttribute("value", i + 1);
-    newPlayer1.innerText = GameLogic.playerList[i].userName;
+    newPlayer1.innerText = playerList[i].userName;
     player1Select.appendChild(newPlayer1);
   }
-  for (var i = 0; i < GameLogic.playerList.length; i++) {
+  for (var i = 0; i < playerList.length; i++) {
     const newPlayer2 = document.createElement("option");
     newPlayer2.setAttribute("value", i + 1);
-    newPlayer2.innerText = GameLogic.playerList[i].userName;
+    newPlayer2.innerText = playerList[i].userName;
     player2Select.appendChild(newPlayer2);
   }
 }
 
 function main() {
+  const player1 = document.getElementById("player1");
+  const player2 = document.getElementById("player2");
   GameBoardGeneration.generateGameBoard();
   GameLogic.gameLoad();
   createPlayerOptions();
@@ -32,7 +36,10 @@ function main() {
   startBtn.addEventListener("click", function (event) {
     resetGameBoard();
     GameLogic.reset();
-    GameLogic.gameStart();
+    GameLogic.setPlayers(player1.value, player2.value)
+    if (GameLogic.checkPlayers()) {
+      GameLogic.gameStart();
+    }
   });
 
   const gameBoard = document.getElementById("game");
