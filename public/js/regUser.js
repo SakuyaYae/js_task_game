@@ -11,7 +11,7 @@ class regUser {
     const user = {
       UserId: await GenerateUserId.getNewUserId(),
       userName: userName.value,
-      score: "0",
+      score: 0,
       matchHistory: []
     }
     this.#saveUser(user);
