@@ -3,16 +3,76 @@
     {
       "UserId": 1,
       "userName": "Vayle",
-      "score": "0",
-      "matchHistory": [],
+      "score": 6,
+      "matchHistory": [
+        {
+          "opponent": "Sakuya",
+          "result": "Win",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Sakuya",
+          "result": "Lost",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Sakuya",
+          "result": "Lost",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Sakuya",
+          "result": "Lost",
+          "turnCount": 3
+        }
+      ],
       "id": 1
     },
     {
       "UserId": 2,
       "userName": "Sakuya",
-      "score": "0",
-      "matchHistory": [],
+      "score": 11,
+      "matchHistory": [
+        {
+          "opponent": "Vayle",
+          "result": "Lost",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Vayle",
+          "result": "Win",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Vayle",
+          "result": "Win",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Vayle",
+          "result": "Win",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Shiraori",
+          "result": "Lost",
+          "turnCount": 3
+        }
+      ],
       "id": 2
+    },
+    {
+      "UserId": 3,
+      "userName": "Shiraori",
+      "score": 3,
+      "matchHistory": [
+        {
+          "opponent": "Sakuya",
+          "result": "Win",
+          "turnCount": 3
+        }
+      ],
+      "id": 3
     }
   ]
 }
