@@ -279,7 +279,7 @@ export default class GameLogic {
   async setPlayers(setPlayer1, setPlayer2) {
     const playerList = await this.getPlayerData();
     for (var i = 0; i < playerList.length; i++) {
-      if (setPlayer1 == setPlayer2) {
+      if (setPlayer1 === setPlayer2) {
         this.#playerCheck = false;
         continue;
       }
@@ -293,8 +293,9 @@ export default class GameLogic {
   }
 
   checkPlayers() {
+    console.log(this.#playerCheck);
     if (!this.#playerCheck) {
-      this.#msgDisplay.innerText = "Same player chose tow diffrent players"
+      this.#msgDisplay.innerText = "Same player: chose two diffrent players"
     }
     return this.#playerCheck;
   }

@@ -31,7 +31,7 @@
     {
       "UserId": 2,
       "userName": "Sakuya",
-      "score": 11,
+      "score": 15,
       "matchHistory": [
         {
           "opponent": "Vayle",
@@ -57,6 +57,16 @@
           "opponent": "Shiraori",
           "result": "Lost",
           "turnCount": 3
+        },
+        {
+          "opponent": "Shiraori",
+          "result": "Win",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Shiraori",
+          "result": "Lost",
+          "turnCount": 4
         }
       ],
       "id": 2
@@ -64,12 +74,22 @@
     {
       "UserId": 3,
       "userName": "Shiraori",
-      "score": 3,
+      "score": 7,
       "matchHistory": [
         {
           "opponent": "Sakuya",
           "result": "Win",
           "turnCount": 3
+        },
+        {
+          "opponent": "Sakuya",
+          "result": "Lost",
+          "turnCount": 3
+        },
+        {
+          "opponent": "Sakuya",
+          "result": "Win",
+          "turnCount": 4
         }
       ],
       "id": 3

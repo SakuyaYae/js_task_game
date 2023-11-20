@@ -49,6 +49,7 @@ th {
 
 td {
   font-size: x-large;
+  border: solid black;
 }
 
 #game>tr>td {
