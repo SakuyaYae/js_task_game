@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Play Game</a>
+      <a href="./display_user.html">Show users</a>
+      <a href="./reg_user.html">Register new user</a>
+      <a href="./leder_board.html">Leder board</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Game</h1>
+    <table>
+      <tbody id="game">
+      </tbody>
+    </table>
+    <button id="startBtn"> Start Game</button>
+    <p id="playerTurnDisplay"></p>
+    <p id="msgDisplay"></p>
+    <section id="playerSelct">
+      <select name="player1" id="player1">
+        <option value="0" selected disabled>Select Player 1</option>
+      </select>
+      <select name="player2" id="player2">
+        <option value="0" selected disabled>Select Player 2</option>
+      </select>
+    </section>
+  </main>
+  <script src="./js/main.js" type="module"></script>
+</body>
+
+</html>
