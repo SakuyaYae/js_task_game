@@ -2,45 +2,40 @@ import { getAllUsers, addUser, getOneUser, updateUser } from "./../function/serv
 
 
 export default class GameLogic {
-  static #gameActive = false;
-  static #playerTurnKeeper = 1;
-  static #player1UnitCount = 0;
-  static #player2UnitCount = 0;
-  static #GameRoundCount = 1;
-  static #winner = "";
-  static #player1 = {
-    userName: "Vayle",
-    score: "0",
-    matchHistory: []
+  #gameActive = false;
+  #playerCheck = true;
+  #playerTurnKeeper = 1;
+  #player1UnitCount = 0;
+  #player2UnitCount = 0;
+  #GameRoundCount = 1;
+  #winner = "";
+  #player1 = {
+    "UserId": 1,
+    "userName": "Vayle",
+    "score": 0,
+    "matchHistory": [],
+    "id": 1
   };
-  static #player2 = {
-    userName: "Saya",
-    score: "0",
-    matchHistory: []
+  #player2 = {
+    "UserId": 2,
+    "userName": "Sakuya",
+    "score": 0,
+    "matchHistory": [],
+    "id": 2
   };
-  static playerList = [
-    {
-      userName: "Vayle",
-      score: "0",
-      matchHistory: []
-    },
-    {
-      userName: "Saya",
-      score: "0",
-      matchHistory: []
-    }
-  ]
-  static #msgDisplay = document.getElementById("msgDisplay");
-  static gameLoad() {
-    this.#getPlayerData();
+
+  #msgDisplay = document.getElementById("msgDisplay");
+
+  async gameLoad() {
+    this.playerList = await this.getPlayerData();
   }
 
-  static gameStart() {
+  gameStart() {
     this.#playerTurnDisplay();
     this.#gameActive = true;
   }
 
-  static playerMove(input) {
+  playerMove(input) {
     if (this.#moveValidation(input)) {
       if (this.#playerUnitCountCheck()) {
         console.log("limit reatched");
@@ -76,7 +71,7 @@ export default class GameLogic {
     }
   }
 
-  static #pickUpUnit(input) {
+  #pickUpUnit(input) {
     var validUnit = true;
     if (input.innerText == "O" && this.#playerTurnKeeper === 1) {
       input.innerText = "-";
@@ -92,7 +87,7 @@ export default class GameLogic {
     return validUnit;
   }
 
-  static #playerTurnUpdate() {
+  #playerTurnUpdate() {
     if (this.#playerTurnKeeper === 1) {
       this.#playerTurnKeeper++;
     }
@@ -104,7 +99,7 @@ export default class GameLogic {
       this.#playerTurnKeeper = 1;
     }
   }
-  static #moveValidation(input) {
+  #moveValidation(input) {
     var valid = true;
     if (input.innerText == "X" || input.innerText == "O") {
       valid = false;
@@ -112,12 +107,13 @@ export default class GameLogic {
     return valid;
   }
 
-  static #playerTurnDisplay() {
+  #playerTurnDisplay() {
     const playerTurnElem = document.getElementById("playerTurnDisplay");
-    playerTurnElem.innerText = "Player " + this.#playerTurnKeeper;
+    playerTurnElem.innerText = "Player: " + this.#playerTurnKeeper;
+
   }
 
-  static #playerUnitCountCheck() {
+  #playerUnitCountCheck() {
     var unitLimit = false;
     if (this.#playerTurnKeeper === 1) {
       if (this.#player1UnitCount === 3) {
@@ -132,9 +128,8 @@ export default class GameLogic {
     return unitLimit;
   }
 
-  static #playerUnitUpdate(input) {
+  #playerUnitUpdate(input) {
     if (this.#playerUnitCountCheck()) {
-      console.log("limit reatched");
       this.#msgDisplay.innerText = "limit reatched";
     }
     else {
@@ -149,7 +144,7 @@ export default class GameLogic {
     }
   }
 
-  static #winCheck() {
+  #winCheck() {
     var gameOver = false;
     const gameBoardSpaces = ["Unused index 0"];
     var indexStr;
@@ -231,7 +226,7 @@ export default class GameLogic {
     return gameOver;
   }
 
-  static #createMatchHistory() {
+  #createMatchHistory() {
     console.log("gameOver");
     if (this.#winner === "P1") {
       const matchWonP1 = {
@@ -265,13 +260,15 @@ export default class GameLogic {
       this.#player2.matchHistory.push(matchWonP2);
       this.#player2.score += 3;
     }
+    this.#updatePlayer(this.#player1);
+    this.#updatePlayer(this.#player2);
   }
 
-  static isRunning() {
+  isRunning() {
     return this.#gameActive;
   }
 
-  static reset() {
+  reset() {
     this.#player1UnitCount = 0;
     this.#player2UnitCount = 0;
     this.#playerTurnKeeper = 1;
@@ -279,24 +276,33 @@ export default class GameLogic {
     this.#winner = "";
   }
 
-  static setPlayers(setPlayer1, setPlayer2) {
-    for (var i = 0; i < this.playerList.length; i++) {
-      if (setPlayer1 === setPlayer2) {
+  async setPlayers(setPlayer1, setPlayer2) {
+    const playerList = await this.getPlayerData();
+    for (var i = 0; i < playerList.length; i++) {
+      if (setPlayer1 == setPlayer2) {
+        this.#playerCheck = false;
         continue;
       }
-      if (setPlayer1 === this.playerList[i].userName) {
-        this.#player1 = this.playerList[i];
+      else if (setPlayer1 == playerList[i].UserId) {
+        this.#player1 = playerList[i];
       }
-      if (setPlayer2 === this.playerList[i].userName) {
-        this.#player2 = this.playerList[i];
+      else if (setPlayer2 == playerList[i].UserId) {
+        this.#player2 = playerList[i];
       }
     }
   }
-  static async #updatePlayer(player) {
+
+  checkPlayers() {
+    if (!this.#playerCheck) {
+      this.#msgDisplay.innerText = "Same player chose tow diffrent players"
+    }
+    return this.#playerCheck;
+  }
+  async #updatePlayer(player) {
     updateUser(player);
   }
 
-  static async #getPlayerData() {
-    const userData = await getAllUsers();
+  async getPlayerData() {
+    return getAllUsers();
   }
 }
